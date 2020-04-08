@@ -1,0 +1,32 @@
+{
+  "name": "FilaConversor",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "posicao": {
+      "type": "number"
+    },
+    "moedaOrigem": {
+      "type": "string"
+    },
+    "moedaFinal": {
+      "type": "string"
+    },
+    "valorDesejado": {
+      "type": "number"
+    },
+    "dataCotacao": {
+      "type": "string"
+    },
+    "dataHoraCriacao": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

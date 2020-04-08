@@ -1,0 +1,202 @@
+{
+  "name": "Conversor",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "moedaOrigem": {
+      "type": "string"
+    },
+    "moedaFinal": {
+      "type": "string"
+    },
+    "valorDesejado": {
+      "type": "number"
+    },
+    "dataCotacao": {
+      "type": "string"
+    },
+    "totalPrecoCompra": {
+      "type": "number"
+    },
+    "totalPrecoVenda": {
+      "type": "number"
+    },
+    "dataHoraCriacao": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "realizaConversao": {
+      "accepts": [
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": true,
+          "description": "Data da cotação que se deseja consultar"
+        },
+        {
+          "arg": "moedaOrigem",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja converter"
+        },
+        {
+          "arg": "moedaFinal",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja obter convertida"
+        },
+        {
+          "arg": "valorDesejado",
+          "type": "number",
+          "required": true,
+          "description": "Valor para a conversão"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "conversao",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da conversão solicitada com processamento em fila"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/realizaConversao",
+          "verb": "get"
+        }
+      ]
+    },
+    "realizaConversaoFila": {
+      "accepts": [
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": true,
+          "description": "Data da cotação que se deseja consultar"
+        },
+        {
+          "arg": "moedaOrigem",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja converter"
+        },
+        {
+          "arg": "moedaFinal",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja obter convertida"
+        },
+        {
+          "arg": "valorDesejado",
+          "type": "number",
+          "required": true,
+          "description": "Valor para a conversão"
+        },
+        {
+          "arg": "prioridade",
+          "type": "number",
+          "required": true,
+          "description": "Identifica se essa consulta vai assumir a primeira posição na fila (0-fila normal, 1-fila prioritária) "
+        }
+      ],
+      "returns": [
+        {
+          "arg": "conversao",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da conversão solicitada"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/realizaConversaoFila",
+          "verb": "get"
+        }
+      ]
+    },
+    "ConsultaBc": {
+      "accepts": [
+        {
+          "arg": "codigoMoeda",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "retornoBc",
+          "type": "object",
+          "root": true,
+          "description": "Retorno da API do Banco Central"
+        }
+      ],
+      "description": "Realiza a consulta para a api do Banco Central",
+      "http": [
+        {
+          "path": "/consultaBc",
+          "verb": "get"
+        }
+      ]
+    },
+    "LimpaCache": {
+      "accepts": [
+        {
+          "arg": "tempoMinutos",
+          "type": "number",
+          "required": true,
+          "description": "Tempo em minutos para manter cache ativo"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da limpeza feita"
+        }
+      ],
+      "description": "Realiza a limpeza de cache",
+      "http": [
+        {
+          "path": "/limpaCache",
+          "verb": "post"
+        }
+      ]
+    },
+    "ConverteProximoFila": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": "Resultado do processamento"
+        }
+      ],
+      "description": "Converte o primeiro item da fila de processamento",
+      "http": [
+        {
+          "path": "/converteProximoFila",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}

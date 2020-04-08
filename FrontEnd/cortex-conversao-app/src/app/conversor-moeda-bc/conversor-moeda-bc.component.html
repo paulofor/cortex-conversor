@@ -1,0 +1,104 @@
+<div style="margin: 20px;">
+<h2 mat-dialog-title>Conversão de Moedas</h2>
+
+<form class="example-full-width" (ngSubmit)="onSubmit()">
+
+  <mat-dialog-content *ngIf="conversor">
+
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Moeda Origem" #moedaOrigem [(ngModel)]="conversor.moedaOrigem" name="moedaOrigem">
+        <mat-option value="BRL">Real</mat-option>
+        <mat-option value="AUD">Dólar australiano</mat-option>
+        <mat-option value="CAD">Dólar canadense</mat-option>
+        <mat-option value="CHF">Franco suíço</mat-option>
+        <mat-option value="DKK">Coroa dinamarquesa</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="GBP">Libra Esterlina</mat-option>
+        <mat-option value="JPY">Iene</mat-option>
+        <mat-option value="NOK">Coroa norueguesa</mat-option>
+        <mat-option value="SEK">Coroa sueca</mat-option>
+        <mat-option value="USD">Dólar dos Estados Unidos</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Moeda Final" #moedaFinal [(ngModel)]="conversor.moedaFinal" name="moedaFinal">
+        <mat-option value="BRL">Real</mat-option>
+        <mat-option value="AUD">Dólar australiano</mat-option>
+        <mat-option value="CAD">Dólar canadense</mat-option>
+        <mat-option value="CHF">Franco suíço</mat-option>
+        <mat-option value="DKK">Coroa dinamarquesa</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="GBP">Libra Esterlina</mat-option>
+        <mat-option value="JPY">Iene</mat-option>
+        <mat-option value="NOK">Coroa norueguesa</mat-option>
+        <mat-option value="SEK">Coroa sueca</mat-option>
+        <mat-option value="USD">Dólar dos Estados Unidos</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+      <input matInput maxlength="10" #valorDesejado [(ngModel)]="conversor.valorDesejado" name="valorDesejado"
+        placeholder="Valor para conversão" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Data para conversão" [(ngModel)]="dataParaCotacao"
+        #dataCotacao name="dataCotacao">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <br>
+  <mat-dialog-actions>
+    <button mat-raised-button>Enviar</button>
+  </mat-dialog-actions>
+
+</form>
+
+
+
+</div>
+
+<div class="container-fluid" *ngIf="conversorResultado">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Resultado Conversão</h4>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped">
+            <tr>
+              <td width="30%">Valor para compra</td>
+              <td>{{conversorResultado.totalPrecoCompra  | number : '1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Valor para venda</td>
+              <td>{{conversorResultado.totalPrecoVenda  | number : '1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Usou cache</td>
+              <td>{{conversorResultado.cache}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="mensagemCotacao">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h5>Data Sem Cotação</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
