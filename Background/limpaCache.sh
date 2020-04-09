@@ -1,2 +1,2 @@
-cd /home/usuario/aplicacoes/CortexIntelligenceProjeto/Deamons/Eclipse-Workspace/LoopbackCliente/dist
+cd /home/usuario/aplicacoes/CortexIntelligenceProjeto/Background/Eclipse-Workspace/LoopbackCliente/dist
 java -jar LimpaCache.jar
